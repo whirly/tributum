@@ -38,7 +38,6 @@ cus = {
     process: function( file, callback ) {
         var year = file.replace( ".csv", "" );
         cus.cityData[ year ] = new Array();
-        console.log( "process ... " + year );
 
         csv()
             .from.path( cus.directory + "/" + file, { delimiter: ";" })
@@ -49,10 +48,12 @@ cus = {
                     cus.cityData[ year ].push({
                         name: row[ 1 ],
                         population: parseInt( row[ 2 ].replace(" ", "" ) ),
-                        spendingPerInhabitant: parseInt( row[ 5 ] ),
-                        directTaxesPerInhabitant: parseInt( row[ 6 ] ),
-                        realIncomePerInhabitant: parseInt( row[ 7 ] ),
-                        equipmentSpendingPerInhabitant: parseInt( row[ 8 ])
+                        spendingPerInhabitant: parseInt( row[ 5 ].replace(" ", "" ) ),
+                        directTaxesPerInhabitant: parseInt( row[ 6 ].replace(" ", "" ) ),
+                        realIncomePerInhabitant: parseInt( row[ 7 ].replace(" ", "" ) ),
+                        equipmentSpendingPerInhabitant: parseInt( row[ 8 ].replace(" ", "" )),
+                        debtPerInhabitant: parseInt( row[ 9 ].replace(" ", "" )),
+                        operatingCost: parseInt( row[ 10 ].replace(" ", "" ))
                     });
                 }
             })
@@ -85,6 +86,52 @@ cus = {
                 }
             }
         });
+    },
+
+    getEntryForCityForYear: function( year, city ) {
+        var entriesForYear = cus.cityData[ year ];
+
+        var index, entry;
+
+
+        for( index in entriesForYear ) {
+            entry = entriesForYear[ index ];
+
+            if( entry.name == city ) {
+                return entry;
+            }
+        }
+
+        return null;
+    },
+
+    getDataFor: function( city, category ) {
+
+        var resultat = [];
+        var index;
+
+        for (index in cus.cityData) {
+            var entry = this.getEntryForCityForYear( index, city );
+
+            if( entry ) {
+                line = {
+                    'year': index
+                }
+
+                var amount = entry[ category ];
+
+                if( category != "population" ) {
+                    if( parseInt( index ) < 2002 ) {
+                        amount = parseInt( amount ) / 6.55957;
+                    }
+                }
+                line[ category ] = amount;
+                resultat.push( line );
+            }
+
+        }
+
+        return resultat;
     }
 }
 

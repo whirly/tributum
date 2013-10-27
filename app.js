@@ -5,10 +5,12 @@
 
 var express = require('express');
 var routes = require('./routes');
-var user = require('./routes/user');
+
 var http = require('http');
 var path = require('path');
+
 var cus = require('./models/cus').Cus;
+var api = require('./controllers/api');
 
 var app = express();
 
@@ -22,6 +24,7 @@ app.use(express.bodyParser());
 app.use(express.methodOverride());
 app.use(app.router);
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(require('less-middleware')({ src: path.join(__dirname, 'public') }));
 
 // development only
 if ('development' == app.get('env')) {
@@ -29,10 +32,12 @@ if ('development' == app.get('env')) {
 }
 
 app.get('/', routes.index);
-app.get('/users', user.list);
+
+app.get('/api/cities', api.listCities );
+app.get('/api/:city/:category', api.getDataForCity );
+
 
 cus.parse( "data", function( err, data ) {
-    console.log( data );
     http.createServer(app).listen(app.get('port'), function(){
         console.log('Express server listening on port ' + app.get('port'));
     });
