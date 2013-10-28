@@ -47,10 +47,14 @@ app.controller( 'MainCtrl', [ '$scope', '$http', function( $scope, $http ) {
         svg.selectAll(".axis").remove();
 
         var xAxisGroup = svg.append("g").attr("class", "axis")
-            .attr("transform", "translate( 0, " + ( height - padding ) + ")").call( xAxis );
+            .attr("transform", "translate( 0, " + ( height - padding ) + ")")
+            .style( { 'stroke': 'black', 'fill': 'none', 'stroke-width': '1px' })
+            .call( xAxis );
 
         var yAxisGroup = svg.append("g").attr("class", "axis")
-            .attr("transform", "translate( " + ( leftPadding ) + ", 0)").call( yAxis );
+            .attr("transform", "translate( " + ( leftPadding ) + ", 0)")
+            .style( { 'stroke': 'black', 'fill': 'none', 'stroke-width': '1px' })
+            .call( yAxis );
 
         svg.selectAll(".entry").data([]).
             exit().remove();
