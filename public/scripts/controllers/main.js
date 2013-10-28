@@ -22,8 +22,6 @@ app.controller( 'MainCtrl', [ '$scope', '$http', function( $scope, $http ) {
 
     function doGraph( element, value, data ) {
 
-        console.log( data );
-
         var gap = 4;
         var padding = 20;
         var leftPadding = 50;
