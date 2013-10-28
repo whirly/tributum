@@ -44,6 +44,13 @@ app.controller( 'MainCtrl', [ '$scope', '$http', function( $scope, $http ) {
 
         svg.selectAll(".axis").remove();
 
+        var tooltip = d3.select("body")
+            .append("div")
+            .attr("class", "chart-tooltip")
+            .style("position", "absolute")
+            .style("z-index", "10")
+            .style("visibility", "hidden")
+
         var xAxisGroup = svg.append("g").attr("class", "axis")
             .attr("transform", "translate( 0, " + ( height - padding ) + ")")
             .style( { 'stroke': 'black', 'fill': 'none', 'stroke-width': '1px' })
@@ -66,11 +73,19 @@ app.controller( 'MainCtrl', [ '$scope', '$http', function( $scope, $http ) {
             .attr('fill', 'steelblue')
             .attr('width', xScale.rangeBand() - gap )
             .attr('height', 0 )
+            .on("mouseover", function( d )
+                {
+                    tooltip.text( Math.round( barValue( d )));
+                    return tooltip.style("visibility", "visible");
+                })
+            .on("mousemove", function(){return tooltip.style("top", (event.pageY-10)+"px").style("left",(event.pageX+10)+"px");})
+            .on("mouseout", function(){return tooltip.style("visibility", "hidden");})
+
             .transition()
-            .duration( 1000 )
-            .delay(function(d, i) { return i * 100; })
-            .attr("y", y )
-            .attr("height", function( d ) { return height - padding - yScale( barValue(d) ); } );
+                .duration( 1000 )
+                .delay(function(d, i) { return i * 100; })
+                .attr("y", y )
+                .attr("height", function( d ) { return height - padding - yScale( barValue(d) ); } );
     }
 
     function processCityChange() {
