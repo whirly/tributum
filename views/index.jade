@@ -8,25 +8,27 @@ block content
 
         .collapse.navbar-collapse.navbar-ex1-collapse
             ul.nav.navbar-nav
-                li.dropdown
+                li.dropdown.ng-cloak
                     a.dropdown-toggle(href="#", data-toggle="dropdown")
                         | {{ selectedCities }}
                         b.caret
 
                         ul.dropdown-menu
                             li( ng-repeat="city in cities" )
-                                a(href="#", ng-click="changeCity( 'left', city )" ) {{ city }}
-    .container
+                                a(href="#", ng-click="changeCity( city )" ) {{ city }}
+    .container.ng-cloak
         .row
             .col-md-12
                 h1 {{ selectedCities | capitalize }}
 
                 h2  Population
-                p Evolution de la population de la ville, à noter que le recensement n'ayant pas lieu toutes les années ce n'est pas une variable linéaires.
+                p Evolution de la population de la ville, à noter que le recensement n'ayant pas lieu toutes les années la valeur n'est pas continue mais présente des effets d'escaliers.
                 svg#populationChart( width="#{chartWidth}", height="300px" )
 
                 h2 Fonctionnement
-                p Dépense réelles de fonctionnement en euros par habitant.
+                p Il s’agit des dépenses liées au fonctionnement courant de la collectivité (les frais de rémunération des personnel, les dépenses d'entretien et de fourniture, les frais de fonctionnement divers correspondant aux compétences de la collectivité, les intérêts de la dette...). La valeur est exprimé en&nbsp;
+                    b euro par habitant.
+
                 svg#fonctionnementChart( width="#{chartWidth}", height="300px" )
 
                 h2 Imposition directe
@@ -34,19 +36,23 @@ block content
                 svg#impotDirectChart( width="#{chartWidth}", height="300px" )
 
                 h2 Recette réelles
-                p Recettes réelles de fonctionnement en euros par habitant.
+                p Il s’agit des produits de fonctionnement issus de la fiscalité directe locale (notamment taxe d'habitation, taxe sur le foncier bâti et le foncier non bâti, taxe professionnelle jusqu'en 2009) ;  des recettes fiscales indirectes, des dotations versées par l'État, des ressources d'exploitation des domaines et des produits financiers. La valeur est exprimé&nbsp;
+                    b en euros par habitant.
                 svg#recetteReelleChart( width="#{chartWidth}", height="300px" )
 
                 h2 Dépense d'équipement
-                p Dépense d'équipement brut en euros par habitant.
+                p Elles rassemblent généralement les dépenses en capital (les remboursements d'emprunts, les prêts et avances accordés par la collectivité,  les dépenses directes d'investissement, les subventions d'équipements versées). La valeur est exprimé&nbsp;
+                    b en euro par habitant.
                 svg#equipementChart( width="#{chartWidth}", height="300px" )
 
                 h2 Encours de la dette
-                p Encours global de la dette en euros par habitant.
+                p L'encours de dette correspond au total des emprunts et dettes de la collectivité à moyen et long terme. On calcule le ratio &nbsp;
+                    b en euros par habitant.
                 svg#detteChart( width="#{chartWidth}", height="300px" )
 
                 h2 Dotation globale de fonctionnement
-                p Dotation globale de fonctionnement en euros par habitant.
+                p La dotation globale de fonctionnement (DGF) est la principale dotation de fonctionnement de l'État aux collectivités territoriales. Elle se divise en deux parties : la part forfaitaire perçue par toutes les collectivités bénéficiaires et la part péréquation reversée aux collectivités les plus défavorisées. On calcule le ratio&nbsp;
+                    b en euros par habitant.
                 svg#dotattionChart( width="#{chartWidth}", height="300px" )
 
 

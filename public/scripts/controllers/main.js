@@ -7,7 +7,7 @@ app.controller( 'MainCtrl', [ '$scope', '$http', function( $scope, $http ) {
             $scope.cities = data;
         })
 
-    $scope.changeCity = function( side, city ) {
+    $scope.changeCity = function( city ) {
         $scope.selectedCities = city;
         processCityChange();
 
