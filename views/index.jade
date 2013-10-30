@@ -16,6 +16,7 @@ block content
                         ul.dropdown-menu
                             li( ng-repeat="city in cities" )
                                 a(href="#", ng-click="changeCity( city )" ) {{ city }}
+
     .container.ng-cloak
         .row
             .col-md-12
@@ -56,5 +57,25 @@ block content
                 p La dotation globale de fonctionnement (DGF) est la principale dotation de fonctionnement de l'État aux collectivités territoriales. Elle se divise en deux parties : la part forfaitaire perçue par toutes les collectivités bénéficiaires et la part péréquation reversée aux collectivités les plus défavorisées. On calcule le ratio&nbsp;
                     b en euros par habitant.
                 svg#dotattionChart( width="#{chartWidth}", height="300px" )
+
+        .row(style="margin-top: 32px")
+            .col-md-6
+                .row
+                    .col-md-4
+                        img.img-responsive( src='/images/logo_mitm.jpg' )
+                    .col-md-8
+                        p Application réalisée par&nbsp;
+                            a(href="http://www.methodinthemadness.eu") Method In The Madness
+                            | , pour nous contacter écrire à contact@methodinthemadness.eu
+
+            .col-md-6
+                .row
+                    .col-md-4
+                        img.img-responsive( src='/images/logo_cus.png' )
+                    .col-md-8
+                        p Données fournises dans le cadre du programme Open Data de la&nbsp;
+                            a(href="http://www.strasbourg.eu") Communauté Urbaine de Strasbourg.
+                            | &nbsp;Le jeu de données utilisé se trouve&nbsp;
+                            a(href="http://www.strasbourg.eu/fr/ma-situation/professionnel/open-data/donnees/budget-open-data/ratios-budgets-primitifs-communes-cus") ici.
 
 
