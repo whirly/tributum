@@ -22,17 +22,19 @@ block content
                 h1 {{ selectedCities | capitalize }}
 
                 h2  Population
-                p Evolution de la population de la ville, à noter que le recensement n'ayant pas lieu toutes les années la valeur n'est pas continue mais présente des effets d'escaliers.
+                p Evolution de la population de la ville, à noter que le recensement n'ayant pas lieu toutes les années la valeur n'est pas continue mais présente des effets d'escaliers. La valeur est exprimée&nbsp;
+                    b en habitants.
                 svg#populationChart( width="#{chartWidth}", height="300px" )
 
-                h2 Fonctionnement
+                h2 Dépense de fonctionnement
                 p Il s’agit des dépenses liées au fonctionnement courant de la collectivité (les frais de rémunération des personnel, les dépenses d'entretien et de fourniture, les frais de fonctionnement divers correspondant aux compétences de la collectivité, les intérêts de la dette...). La valeur est exprimée &nbsp;
                     b en euro par habitant.
 
                 svg#fonctionnementChart( width="#{chartWidth}", height="300px" )
 
                 h2 Imposition directe
-                p Produit de l'impôt direct en euros par habitant.
+                p Produit de l'impôt direct. La valeur est exprimée&nbsp;
+                    b en euros par habitant.
                 svg#impotDirectChart( width="#{chartWidth}", height="300px" )
 
                 h2 Recette réelles

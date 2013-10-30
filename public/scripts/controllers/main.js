@@ -42,6 +42,12 @@ app.controller( 'MainCtrl', [ '$scope', '$http', function( $scope, $http ) {
         var x = function( d, i ) { return xScale( d.year ) + gap; };
         var y = function( d ) { return yScale(d[ value ]); };
 
+        var suffix = " €";
+
+        if (value == "population" ) {
+            suffix = "";
+        }
+
         svg.selectAll(".axis").remove();
 
         var tooltip = d3.select("body")
@@ -75,7 +81,7 @@ app.controller( 'MainCtrl', [ '$scope', '$http', function( $scope, $http ) {
             .attr('height', 0 )
             .on("mouseover", function( d )
                 {
-                    tooltip.text( Math.round( barValue( d )));
+                    tooltip.text( Math.round( barValue( d )) + suffix);
                     return tooltip.style("visibility", "visible");
                 })
             .on("mousemove", function(){return tooltip.style("top", (event.pageY-10)+"px").style("left",(event.pageX+10)+"px");})
